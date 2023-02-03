@@ -80,13 +80,23 @@ SELECT reorder_level FROM northwind.products;
 -- ------------------------------------------------------------------
 -- 11). Products with Supplier Company & Address Info
 -- ------------------------------------------------------------------
-
+SELECT p.product_name,
+p.list_price AS product_list_price,
+p.category AS product_category,
+s.company AS supplier_company,
+s.address AS supplier_address,
+s.city AS supplier_city,
+s.state_province AS supplier_state_province,
+s.zip_postal_code AS supplier_zip_postal_code
+FROM northwind.suppliers s INNER JOIN northwind.product p
+ON s.id = p.supplier_ids;
 
 
 -- ------------------------------------------------------------------
 -- 12). Number of Products per Category With Less Than 5 Units
 -- ------------------------------------------------------------------
-
+SELECT category, COUNT(*) as units_in_stock FROM northwind.products
+GROUP BY category HAVING units_in_stock < 5;
 
 
 -- ------------------------------------------------------------------
